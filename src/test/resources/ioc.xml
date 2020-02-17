@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans ">
+    <bean id="people" class="com.wj.ioc.People">
+        <property name="name" value="wujian"/>
+        <property name="age" value="22"/>
+        <property name="skill" value="computer"/>
+    </bean>
+
+    <bean id="life" class="com.wj.ioc.Life">
+        <property name="people" ref="people"/>
+        <property name="direction" value="工作"/>
+        <property name="daily" value="吃饭睡觉玩游戏"/>
+    </bean>
+
+    <bean id="graduationService" class="com.wj.aop.GraduationServiceImpl"/>
+
+    <bean id="abstractInterceptor" class="com.wj.aop.advised.advice.AbstractInterceptor"/>
+
+    <bean id="autoProxyCreator" class="com.wj.aop.advised.AspectJAwareAdvisorAutoProxyCreator"/>
+
+    <bean id="graduationServiceAspect" class="com.wj.aop.advised.advisor.AspectJPointcutAdvisor">
+        <property name="advice" ref="abstractInterceptor"/>
+        <property name="expression" value="execution(* com.wj.aop.GraduationService.*(..))"/>
+    </bean>
+
+</beans>
